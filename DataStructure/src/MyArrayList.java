@@ -1,5 +1,4 @@
 import java.util.NoSuchElementException;
-
 public class MyArrayList<E> {
     // 真正存储的数据
     private E[] data;
