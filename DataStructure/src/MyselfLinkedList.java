@@ -64,7 +64,7 @@ public class MyselfLinkedList<E> {
         // 创建需要插入的节点
         Node<E> insertNode = new Node<>(element);
         Node<E> temp = getNode(size - 1);
-
+        System.out.println(temp + " " + element);
         temp.next = insertNode;
         insertNode.next = null;
         size++;
@@ -80,7 +80,13 @@ public class MyselfLinkedList<E> {
         // 原： prevNode -> temp
         // 改： prevNode -> insertNode -> temp
         Node<E> insertNode = new Node<>(element);
-        Node<E> prevNode = getNode(index);
+        Node<E> prevNode;
+        if(index == 0 ) {
+            addFirst(element);
+            return;
+        } else {
+            prevNode = getNode(index - 1);
+        }
         Node<E> temp = prevNode.next;
 
         insertNode.next = temp;
@@ -267,7 +273,7 @@ public class MyselfLinkedList<E> {
 
             @Override
             public boolean hasNext() {
-                return p != null && p.next != null;
+                return p != null;
             }
 
             @Override
