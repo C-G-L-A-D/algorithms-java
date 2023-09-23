@@ -266,14 +266,22 @@ public class MyDoubleLinkedList<E> {
 
     // 返回 index 对应的 Node 节点
     private Node<E> getNode(int index) {
-        // 链表中第一个元素
         checkElementIndex(index);
-        Node<E> firstNode = head.next;
-        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
-        for (int i = 0; i < index; i++) {
-            firstNode = firstNode.next;
+        if(index > size << 2) {
+            // 可从尾部开始查找
+            Node<E> lastNode = tail.prev;
+            for (int i = 0; i < size - index - 1; i--) {
+                lastNode = lastNode.prev;
+            }
+            return lastNode;
+        } else {
+            Node<E> firstNode = head.next;
+            for (int i = 0; i < index; i++) {
+                firstNode = firstNode.next;
+            }
+            return firstNode;
         }
-        return firstNode;
+
     }
 
     public Iterator<E> iterator() {
