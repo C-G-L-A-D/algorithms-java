@@ -2,14 +2,14 @@ import java.util.Iterator;
 
 public class MyLinkedList {
 
-//    private MyDoubleLinkedList<Integer> linkedList;
+    private MyDoubleLinkedList<Integer> linkedList;
 //    private MyArrayList<Integer> linkedList;
-    private MyselfLinkedList<Integer> linkedList;
+//    private MyselfLinkedList<Integer> linkedList;
 
     public MyLinkedList() {
-//        linkedList = new MyDoubleLinkedList<>();
+        linkedList = new MyDoubleLinkedList<>();
 //        linkedList = new MyArrayList<>(10);
-        linkedList = new MyselfLinkedList<>();
+//        linkedList = new MyselfLinkedList<>();
     }
 
     public int get(int index) {
@@ -45,7 +45,10 @@ public class MyLinkedList {
 
         linkedList1.addAtHead(10);
         linkedList1.addAtTail(20);
-        linkedList1.addAtIndex(0, 15);
+        linkedList1.addAtTail(30);
+        linkedList1.addAtTail(40);
+        linkedList1.addAtTail(50);
+        linkedList1.addAtIndex(3, 15);
         linkedList1.printLinkedList();
     }
 }
