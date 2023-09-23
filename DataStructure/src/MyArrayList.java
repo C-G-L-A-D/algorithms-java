@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 public class MyArrayList<E> {
     // 真正存储的数据
@@ -150,4 +151,38 @@ public class MyArrayList<E> {
         System.arraycopy(data, 0, temp, 0, size);
         data = temp;
     }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private int p = 0;
+
+            @Override
+            public boolean hasNext() {
+                return p != size;
+            }
+
+            @Override
+            public E next() {
+                return data[p++];
+            }
+        };
+    }
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private int p = 0;
+
+            @Override
+            public boolean hasNext() {
+                return p != size;
+            }
+
+            @Override
+            public E next() {
+                return data[p++];
+            }
+        };
+    }
+
 }
