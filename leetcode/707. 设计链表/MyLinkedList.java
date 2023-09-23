@@ -1,0 +1,167 @@
+class MyLinkedList {
+
+    private static class Node {
+        // 当前节点元素
+        Integer val;
+        // 下一个节点指针
+        Node next;
+
+        // 上一个节点指针
+        Node prev;
+
+        Node() {}
+
+        Node(Integer val) {
+            this.val = val;
+        }
+    }
+
+    private final Node head, tail;
+    private int size;
+   
+    public MyLinkedList() {
+        // 创建哨兵节点进行占位， 简化边界条件，防止对特殊条件的判断
+        this.head = new Node();
+        this.tail = new Node();
+
+        head.next = tail;
+        tail.prev = head;
+
+        this.size = 0;
+    }
+    
+    public int get(int index) {
+        if(!checkElementIndex(index)) {
+            return -1;
+        }
+        Node firstNode = head.next;
+        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
+        for (int i = 0; i < index; i++) {
+            firstNode = firstNode.next;
+        }
+        return firstNode.val;
+    }
+    
+    public void addAtHead(int val) {
+        // 创建需要插入的节点
+        Node node = new Node(val);
+        // 记录头指针的下一个节点
+        Node temp = head.next;
+
+        // 将待插入节点的前后指针分别指向头节点和temp节点
+        node.next = temp;
+        node.prev = head;
+
+        temp.prev = node;
+        head.next = node;
+
+        size++;
+    }
+    
+    public void addAtTail(int val) {
+        // 原： temp <=> tail
+        // 改： temp <=> node <=> tail
+        // 创建需要插入的节点
+        Node node = new Node(val);
+        // 记录头指针的上一个节点
+        Node temp = tail.prev;
+
+        node.next = tail;
+        node.prev = temp;
+
+        tail.prev = node;
+        temp.next = node;
+
+        size++;
+    }
+    
+    public void addAtIndex(int index, int val) {
+        if(!checkPositionIndex(index)) {
+            return;
+        }
+        
+        // 原： prevNode <=> temp
+        // 改： prevNode <=> insertNode <=> temp
+        Node insertNode = new Node(val);
+        Node temp = head.next;
+        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        Node prevNode = temp.prev;
+
+        insertNode.prev = prevNode;
+        insertNode.next = temp;
+
+
+        prevNode.next = insertNode;
+        temp.prev = insertNode;
+
+        size++;
+    }
+    
+    public void deleteAtIndex(int index) {
+        if(!checkElementIndex(index)) {
+            return;
+        }
+        Node removeNode = head.next;
+        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
+        for (int i = 0; i < index; i++) {
+            removeNode = removeNode.next;
+        }
+        Node nextNode = removeNode.next;
+        Node prevNode = removeNode.prev;
+
+        nextNode.prev = prevNode;
+        prevNode.next = nextNode;
+
+        removeNode.prev = removeNode.next = null;
+        size--;
+    }
+
+    /***** 工具函数 *****/
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    private  boolean isElementIndex(int index) {
+        return index >= 0 && index < size;
+    }
+
+    private  boolean isPositionIndex(int index) {
+        // 元素间，包含数组的头尾
+        return index >=0 && index <= size;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    private boolean checkElementIndex(int index) {
+        if(!isElementIndex(index)) {
+            return false;
+        }
+        return true;
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    private boolean checkPositionIndex(int index) {
+        if(!isPositionIndex(index)) {
+            return false;
+        }
+        return true;
+    }
+
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
