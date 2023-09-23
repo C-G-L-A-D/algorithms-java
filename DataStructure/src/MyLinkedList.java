@@ -3,10 +3,13 @@ import java.util.Iterator;
 public class MyLinkedList {
 
 //    private MyDoubleLinkedList<Integer> linkedList;
-    private MyArrayList<Integer> linkedList;
+//    private MyArrayList<Integer> linkedList;
+    private MyselfLinkedList<Integer> linkedList;
+
     public MyLinkedList() {
 //        linkedList = new MyDoubleLinkedList<>();
-        linkedList = new MyArrayList<>(10);
+//        linkedList = new MyArrayList<>(10);
+        linkedList = new MyselfLinkedList<>();
     }
 
     public int get(int index) {
