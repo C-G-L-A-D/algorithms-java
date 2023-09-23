@@ -84,6 +84,9 @@ public class MyselfLinkedList<E> {
         if(index == 0 ) {
             addFirst(element);
             return;
+        } else if(index == size) {
+            addLast(element);
+            return;
         } else {
             prevNode = getNode(index - 1);
         }
@@ -129,6 +132,10 @@ public class MyselfLinkedList<E> {
             throw new NoSuchElementException();
         }
 
+        if(size - 2 < 0) {
+            return removeFirst();
+        }
+
         // 原： temp -> removeNode -> null
         // 改： temp -> null
         Node<E> temp = getNode(size - 2);
@@ -152,10 +159,11 @@ public class MyselfLinkedList<E> {
 
         // 原： prevNode -> removeNode -> nextNode
         // 改： prevNode -> nextNode
-        if(index == 0){
+        if(index - 1 < 0){
             return removeFirst();
         }
-        Node<E> prevNode = getNode(index);
+
+        Node<E> prevNode = getNode(index - 1);
         Node<E> removeNode = prevNode.next;
         Node<E> nextNode = removeNode.next;
 
