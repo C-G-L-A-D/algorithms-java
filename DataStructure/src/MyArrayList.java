@@ -34,6 +34,9 @@ public class MyArrayList<E> {
         size++;
     }
 
+    public void addFirst(E e) {
+        add(0, e);
+    }
     // 在 index 索引位置添加一个元素 element
     public void add(int index, E element) {
         // 1. 判断该索引 index 位置是否可以插入元素
@@ -152,23 +155,6 @@ public class MyArrayList<E> {
         data = temp;
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private int p = 0;
-
-            @Override
-            public boolean hasNext() {
-                return p != size;
-            }
-
-            @Override
-            public E next() {
-                return data[p++];
-            }
-        };
-    }
-    @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private int p = 0;
