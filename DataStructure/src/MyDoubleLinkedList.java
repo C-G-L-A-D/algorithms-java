@@ -27,8 +27,8 @@ public class MyDoubleLinkedList<E> {
         this.head = new Node<>(null);
         this.tail = new Node<>(null);
 
-        head.next = head;
-        tail.prev = tail;
+        head.next = tail;
+        tail.prev = head;
 
         this.size = 0;
     }
@@ -62,10 +62,15 @@ public class MyDoubleLinkedList<E> {
      *
      * */
     public void addLast(E element) {
+        // 原： temp <=> tail
+        // 改： temp <=> node <=> tail
         // 创建需要插入的节点
         Node<E> node = new Node<>(element);
         // 记录头指针的上一个节点
         Node<E> temp = tail.prev;
+
+        node.next = tail;
+        node.prev = temp;
 
         tail.prev = node;
         temp.next = node;
@@ -80,7 +85,6 @@ public class MyDoubleLinkedList<E> {
      * */
     public void add(int index, E element) {
         checkPositionIndex(index);
-
         // 原： prevNode <=> temp
         // 改： prevNode <=> insertNode <=> temp
         Node<E> insertNode = new Node<>(element);
@@ -263,17 +267,15 @@ public class MyDoubleLinkedList<E> {
     // 返回 index 对应的 Node 节点
     private Node<E> getNode(int index) {
         // 链表中第一个元素
+        checkElementIndex(index);
         Node<E> firstNode = head.next;
-
-        // TODO: 待完善
+        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
         for (int i = 0; i < index; i++) {
             firstNode = firstNode.next;
         }
-
         return firstNode;
     }
 
-    @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
             Node<E> p = head.next;
