@@ -1,8 +1,8 @@
 import java.util.Iterator;
 
-public class MyLinkedList {
+public class MyLinkedList<E> {
 
-    private MyDoubleLinkedList<Integer> linkedList;
+    private MyDoubleLinkedList<E> linkedList;
 //    private MyArrayList<Integer> linkedList;
 //    private MyselfLinkedList<Integer> linkedList;
 
@@ -12,19 +12,19 @@ public class MyLinkedList {
 //        linkedList = new MyselfLinkedList<>();
     }
 
-    public int get(int index) {
+    public E get(int index) {
         return linkedList.get(index);
     }
 
-    public void addAtHead(int val) {
+    public void addAtHead(E val) {
         linkedList.addFirst(val);
     }
 
-    public void addAtTail(int val) {
+    public void addAtTail(E val) {
         linkedList.addLast(val);
     }
 
-    public void addAtIndex(int index, int val) {
+    public void addAtIndex(int index, E val) {
         linkedList.add(index, val);
     }
 
@@ -33,15 +33,15 @@ public class MyLinkedList {
     }
 
     public void printLinkedList() {
-        Iterator<Integer> iterator = linkedList.iterator();
+        Iterator<E> iterator = linkedList.iterator();
         while (iterator.hasNext()) {
-            Integer element = iterator.next();
+            E element = iterator.next();
             System.out.println(element);
         }
     }
 
     public static void main(String[] args) {
-        MyLinkedList linkedList1 = new MyLinkedList();
+        MyLinkedList<Integer> linkedList1 = new MyLinkedList<>();
 
         linkedList1.addAtHead(10);
         linkedList1.addAtTail(20);
