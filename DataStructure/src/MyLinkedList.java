@@ -32,12 +32,24 @@ public class MyLinkedList<E> {
         linkedList.remove(index);
     }
 
+    public E deleteTail() {
+        return linkedList.removeLast();
+    }
+
+    public E deleteHead() {
+        return linkedList.removeFirst();
+    }
+
     public void printLinkedList() {
         Iterator<E> iterator = linkedList.iterator();
         while (iterator.hasNext()) {
             E element = iterator.next();
             System.out.println(element);
         }
+    }
+
+    public int size() {
+        return linkedList.size();
     }
 
     public static void main(String[] args) {
